@@ -7,81 +7,92 @@ import com.openclassrooms.magicgithub.api.FakeApiService;
 import com.openclassrooms.magicgithub.api.FakeApiServiceGenerator;
 import com.openclassrooms.magicgithub.model.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 
 public class UserRepository {
 
     private final ApiService apiService; // TODO: A utiliser
 
-    private List<User> mUserList;
-    // List<User> users;
-    private List<User> users;
-    //public List<User> UsersList() { return users; };
+    //private List<User> mUserList;
+    //List<User> mUserList = new ArrayList<User>(); // -> []
+
+    //private Iterable<User> IterableUser;
+    private List<User> listeUsersApi;
+    ArrayList<User> arlusers=new ArrayList<User>();
+    //Array<User> arrayUsers = new ArrayList();
+
+    //private HashMap<String,User> GitUsers ;
+    //Set<User> Hubs = new HashSet<User>();
+    //private Vector<User> Vuser;
+
     private int mNextUserIndex;
-    //users=getUsers();
-    //users=this.apiService.getUsers();
 
     public UserRepository(ApiService apiService) {
     //public UserRepository(List<User> userList) {
         this.apiService = apiService;
-        users=FakeApiServiceGenerator.FAKE_USERS;
-        //users=apiService.getUsers();
-        //super(apiService);
-        //mUserList= (List<User>) apiService.getUsers();
-        mUserList = apiService.getUsers();
-        System.out.println("UserRepositoy mUserList size :" + mUserList.size());
+        listeUsersApi=apiService.getUsers();
+        //IterableUser = apiService.getUsers();
+        //this.IterableUser=FakeApiServiceGenerator.FAKE_USERS;
+        //Vuser = new Vector<User>();
+        //Hubs = new HashSet<User>();
+        //System.out.println("UserRepositoy mUserList size :" + mUserList.size());
         mNextUserIndex = 0;
     }
 
     public List<User> getUsers() {
         // TODO: A modifier
-        mUserList.clear();
-        //List<User> mUserList = new ArrayList<User>(apiService.getUsers());
-        System.out.println("getUsers repo mNextUserIndex:" + mNextUserIndex);
-        System.out.println("getUsers repo mUserList size avt +:" + mUserList.size());
-        if (mNextUserIndex == mUserList.size()) {
-            mNextUserIndex = 0;
-        }
-        System.out.println("repository getUsers() ");
-        //for(User q : UsersList()) {  users.get(mNextUserIndex++); }
-        //List<User> list = UsersList();
+        //arlusers.add(listeUsersApi.get(0));
+        arlusers.clear();
+        for(User user : listeUsersApi) {  arlusers.add(listeUsersApi.get(mNextUserIndex++)); }
+        if (mNextUserIndex == listeUsersApi.size()) {
+         mNextUserIndex = 0;
+         }
+        //iterate through current objects and add them to new list
+        System.out.println("UserRepositoy getUsers size arlusers :" +arlusers.size()); // -> 2
+        //System.out.println("UserRepositoy array users :" +arlusers); // -> 2
+        // faire avec myarray.length()
+        return arlusers;
 
-        for (int i=0; i<users.size(); i++)
-        {  //users.get(mNextUserIndex++);
-        //users.add(getUsers().get(i));
-        //users.add(mUserList.get(i));
-        mUserList.add(users.get(i));
-        //mUserList.set(mNextUserIndex,users.get(i));
-        }
-        // ok mUserList.add(users.get(mNextUserIndex++));
-        //mUserList.set(mNextUserIndex++,users.get(mNextUserIndex));
-        //System.out.println("getUsers repo + users.get(mNextUserIndex) :" + users.get(mNextUserIndex).getId());
-        //mUserList.add(users.get(mNextUserIndex));
-        System.out.println("getUsers repo mUserList size :" + mUserList.size());
+        /**  liste
+        System.out.println("UserRepositoy mUserList size avt add :" +mUserList.size()); // -> 2
+        //mUserList.add(1,users.get(1)); //-> [7, 12, 5]
+        System.out.println("UserRepositoy mUserList size apr add :" +mUserList.size()); // -> 2
         return mUserList;
+*/
+        //System.out.println(e.getLogin()+" "+e.getId()+" "+e.getAvatarUrl());
 
-        //return new ArrayList<>(users.get(mNextUserIndex));
-
-        //return (List<User>) mUserList.get(mNextUserIndex++);
-
-        //return null;
+        /**
+         * Hubs.add(users.get(0));
+        System.out.println("UserRepository getUsers Hubs size :" + Hubs.size());
+        return new ArrayList<>(Hubs);
+        */
     }
 
     public void generateRandomUser() {
         // TODO: A modifier
-        this.apiService.generateRandomUser();
+        apiService.generateRandomUser();
+        //listeUsersApi=apiService.getUsers();
     }
 
     public void deleteUser(User user) {
         // TODO: A modifier
         //this.apiService.deleteUser(user);
+        apiService.deleteUser(user);
+
+        System.out.println("UserRepositoy deleteUser => size listusers :" + listeUsersApi.size());
+        //System.out.println("UserRepository deleteUser listUsersApi apr delete :" + listeUsersApi);
         //.remove(user);
-        //deleteUser(user);
-        //mUserList.remove(apiService.deleteUser(););
-        //this.deleteUser(user);
-        //mUserList.remove(user);
+        //deleteUser(user)
     }
 /**
     public String clear() {
