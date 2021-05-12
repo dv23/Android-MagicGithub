@@ -50,11 +50,13 @@ public class ListUserActivity extends BaseActivity implements UserListAdapter.Li
         fab = findViewById(R.id.activity_list_user_fab);
         fab.setOnClickListener(view -> {
             getUserRepository().generateRandomUser();
+            System.out.println("ListUserActivity::configureFab()getUserRepository().getUsers :"+ getUserRepository().getUsers());
             loadData();
         });
     }
 
     private void loadData() {
+        System.out.println("ListUserActivity::loadData() "+ getUserRepository().getUsers());
         adapter.updateList(getUserRepository().getUsers());
     }
 
