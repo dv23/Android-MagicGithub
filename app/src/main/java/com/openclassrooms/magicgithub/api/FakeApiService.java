@@ -20,10 +20,9 @@ public class FakeApiService implements ApiService {
      */
     @Override
     public List<User> getUsers() {
-        // TODO: A modifier
-        System.out.println("getUsers FakeApiService" + users.toString());
+        // TODO: Done
+        //System.out.println("getUsers FakeApiService" + users.toString());
         return users;
-        // instancie generateUsers de FakeApiServiceGenerator
     }
 
     /**
@@ -35,8 +34,10 @@ public class FakeApiService implements ApiService {
 
         // Shuffle the user list
         Collections.shuffle(FAKE_USERS_RANDOM);
-        users.clear();
+        //users.clear(); // -10 05 2021 + 11 05 2020
+        //System.out.println("FakeAPI ::generateUser size users avt add :" +users.size());
         users.add(FAKE_USERS_RANDOM.get(0));
+        //System.out.println("FakeAPI ::generateUser size users apres add :" +users.size());
             }
 
     /**
@@ -44,12 +45,19 @@ public class FakeApiService implements ApiService {
      */
     @Override
     public void deleteUser(User user) {
-        // TODO: A modifier
-        //user=null;
-        //this.deleteUser(user);
+        // TODO:
         //deleteUser(user);
+        //System.out.println("FakeAPI deleteUser user remove :" +user.getLogin());
         users.remove(user);
-        System.out.println("FakeAPI size users :" +users.size());
-
+        //System.out.println("FakeAPI deleteUser size users after remove :" +users.size());
     }
+
+    /**
+     * Récupération du dernier profil
+     * @return le dernier objet de la ocllection de profils, donc le plus récent
+     */
+     public User getLastProfil() {
+        return users.get(users.size()-1);
+    }
+
 }
