@@ -1,5 +1,6 @@
 package com.openclassrooms.magicgithub;
 
+//import com.openclassrooms.magicgithub.api.FakeApiService;
 import com.openclassrooms.magicgithub.ui.user_list.ListUserActivity;
 import com.openclassrooms.magicgithub.utils.RecyclerViewUtils;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -41,7 +42,9 @@ public class UserListInstrumentedTest {
 
     @Test
     public void checkIfAddingRandomUserIsWorking() {
+        System.out.println("ListUserActivity::checkIfAddingRandomUserIsWorking() :");
         onView(withId(R.id.activity_list_user_fab)).perform(click());
+        System.out.println("ListUserActivity::checkIfAddingRandomUserIsWorking()perform(click() :");
         onView(withId(R.id.activity_list_user_rv)).check(new RecyclerViewUtils.ItemCount(currentUsersSize + 1));
     }
 
