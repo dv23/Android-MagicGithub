@@ -51,41 +51,36 @@ public class UserRepositoryTest {
     public void getUsersWithSuccess() {
         List<User> usersActual = userRepository.getUsers();
         //List<User> usersActual = FakeApiService.getUsers();
-        //System.out.println("Test getUsersWithSuccess usersActual :" + userRepository.getUsers());
+        System.out.println("Test getUsersWithSuccess :" );
         /* Log.d("users repo","" + usersActual); */
         List<User> usersExpected = FAKE_USERS;
         //Log.d("repository","test trace debug");
-        //System.out.println("Test getUsersWithSuccess fake_users get 0:" + FAKE_USERS.get(0).getId());
-        // initial assertThat(usersActual, containsInAnyOrder(usersExpected.toArray()));
         //assertThat(usersActual, hasItems(usersExpected));
         assertThat(usersExpected, containsInAnyOrder(usersActual.toArray()));
     }
 
     @Test
     public void generateRandomUserWithSuccess() {
+        System.out.println("Test generateRandomUserWithSucces...: " );
+        //System.out.println(" generateRandomUserWithSuccess Test getUsers().size avt clear : " + userRepository.getUsers().size());
+
         userRepository.getUsers().clear();
+
+        //System.out.println(" generateRandomUserWithSuccess Test getUsers().size apres clear : " + userRepository.getUsers().size());
+
         userRepository.generateRandomUser();
 
-        System.out.println("Test size generateRandomUserWithSucces...avt get 0 : " + userRepository.getUsers().size());
-        //System.out.println("Test generateRandomUserWithSucces...avt get 0 : " + userRepository.getUsers().get(0));
+        //System.out.println(" generateRandomUserWithSuccess Test getUsers().size apres generatrandomuser : " + userRepository.getUsers().size());
 
         User user = userRepository.getUsers().get(0);
 
-        //System.out.println("FAKE users array ... 0 size " +FAKE_USERS.size());
-        //System.out.println(" Test size userRepository generateRandomUserWithSuccess() apres = " + userRepository.getUsers().size());
-        System.out.println(" Test string user = get 0 in generateRandomUserWithSuccess()  " + user.toString() );
-        /**List<User> TestUsers = new ArrayList<>();
-        TestUsers.add(user);
-        System.out.println(" Test user size  " + TestUsers.size());
-        assertEquals(1, TestUsers.size());
-        */
-        //System.out.println(" Test  generateRandomUserWithSucces userRepository size " + userRepository.getUsers().size());
+        //System.out.println(" generateRandomUserWithSuccess Test getUsers().size(  " + userRepository.getUsers().size());
         assertEquals(1, userRepository.getUsers().size());
 
-        System.out.println("test FAKE_USERS_RANDOM ..." + FAKE_USERS_RANDOM);
-        System.out.println("generateRandomUserWithSuccess test user.getAvatarUrl ..." + user.getAvatarUrl());
-        System.out.println("generateRandomUserWithSuccess test FAKE_SUER stream ..." + FAKE_USERS_RANDOM.stream().map(User::getAvatarUrl).collect(Collectors.toList()));
-        //assertFalse(FAKE_USERS_RANDOM.stream().map(User::getAvatarUrl).collect(Collectors.toList()).contains(user.getAvatarUrl()));
+        //System.out.println("test FAKE_USERS_RANDOM ..." + FAKE_USERS_RANDOM);
+        //System.out.println("generateRandomUserWithSuccess test user.getAvatarUrl ..." + user.getAvatarUrl());
+        //System.out.println("generateRandomUserWithSuccess test FAKE_SUER stream ..." + FAKE_USERS_RANDOM.stream().map(User::getAvatarUrl).collect(Collectors.toList()));
+
         assertTrue(FAKE_USERS_RANDOM.stream().map(User::getId).collect(Collectors.toList()).contains(user.getId()));
         assertTrue(FAKE_USERS_RANDOM.stream().map(User::getId).collect(Collectors.toList()).contains(user.getId()));
         assertTrue(FAKE_USERS_RANDOM.stream().map(User::getLogin).collect(Collectors.toList()).contains(user.getLogin()));
@@ -97,12 +92,10 @@ public class UserRepositoryTest {
     @Test
     public void deleteUserWithSuccess() {
         User userToDelete = userRepository.getUsers().get(0);
-        //System.out.println(" Test deleteUsersWithSuccess user = get 0 : " + userRepository.getUsers( ).get(0));
+        System.out.println(" Test deleteUsersWithSuccess  : " );
         userRepository.deleteUser(userToDelete);
-        //List<User> TestUsers = new ArrayList<>();
-        //TestUsers.add(userRepository.getUsers());
         //System.out.println(" Test user size  " + TestUsers.size());
-        System.out.println("Test deleteUsersWithSuccess : userRepository contains apr delete :" + userRepository.getUsers().contains(userToDelete));
+        //System.out.println("Test deleteUsersWithSuccess : userRepository contains apr delete :" + userRepository.getUsers().contains(userToDelete));
         assertFalse(userRepository.getUsers().contains(userToDelete));
         //assertTrue(userRepository.getUsers().contains(userToDelete));
     }
