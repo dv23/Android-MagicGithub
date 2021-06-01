@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>UserRepositoryTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #629755; font-weight: bold; font-style: italic;}
+.s4 { color: #808080;}
+.s5 { color: #6a8759;}
+.s6 { color: #6897bb;}
+.s7 { color: #77b767; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+UserRepositoryTest.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.openclassrooms.magicgithub</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.openclassrooms.magicgithub.api.FakeApiService</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.openclassrooms.magicgithub.api.FakeApiServiceGenerator</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.openclassrooms.magicgithub.di.Injection</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.openclassrooms.magicgithub.model.User</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.openclassrooms.magicgithub.repository.UserRepository</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.junit.Before</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.junit.BeforeClass</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.junit.Test</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.junit.runner.RunWith</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.junit.runners.JUnit4</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.stream.Collectors</span><span class="s0">;</span>
+
+<span class="s0">import static </span><span class="s1">com.openclassrooms.magicgithub.api.FakeApiServiceGenerator.FAKE_USERS</span><span class="s0">;</span>
+<span class="s0">import static </span><span class="s1">com.openclassrooms.magicgithub.api.FakeApiServiceGenerator.FAKE_USERS_RANDOM</span><span class="s0">;</span>
+<span class="s0">import static </span><span class="s1">org.junit.Assert.*</span><span class="s0">;</span>
+<span class="s0">import static </span><span class="s1">org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder</span><span class="s0">;</span>
+
+
+<span class="s2">/**</span>
+ <span class="s2">* Unit test, which will execute on a JVM.</span>
+ <span class="s2">* Testing UserRepository.</span>
+ <span class="s2">*/</span>
+<span class="s1">@RunWith(JUnit4.</span><span class="s0">class</span><span class="s1">)</span>
+<span class="s0">public class </span><span class="s1">UserRepositoryTest {</span>
+    
+    <span class="s0">private </span><span class="s1">UserRepository userRepository</span><span class="s0">;</span>
+    
+    <span class="s1">@Before</span>
+    <span class="s0">public void </span><span class="s1">setup() {</span>
+        <span class="s1">userRepository = Injection.createUserRepository()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/** procédure à exécuter avant l'ensemble des tests,</span>
+    <span class="s3">@BeforeClass</span>
+    <span class="s2">public static void testPreCondition() throws Exception{</span>
+        <span class="s2">//assertNotNull(userRepository);</span>
+        <span class="s2">// procedure a executer avant l'ensemble des test;</span>
+        <span class="s2">//assertNotNull(userRepository.getUsers());</span>
+    <span class="s2">}*/</span>
+
+    <span class="s1">@Test</span>
+    <span class="s0">public void </span><span class="s1">getUsersWithSuccess() {</span>
+        <span class="s1">List&lt;User&gt; usersActual = userRepository.getUsers()</span><span class="s0">;</span>
+        <span class="s4">//List&lt;User&gt; usersActual = FakeApiService.getUsers();</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot;Test getUsersWithSuccess :&quot; </span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s4">/* Log.d(&quot;users repo&quot;,&quot;&quot; + usersActual); */</span>
+        <span class="s1">List&lt;User&gt; usersExpected = FAKE_USERS</span><span class="s0">;</span>
+        <span class="s4">//Log.d(&quot;repository&quot;,&quot;test trace debug&quot;);</span>
+        <span class="s4">//assertThat(usersActual, hasItems(usersExpected));</span>
+        <span class="s1">assertThat(usersExpected</span><span class="s0">, </span><span class="s1">containsInAnyOrder(usersActual.toArray()))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Test</span>
+    <span class="s0">public void </span><span class="s1">generateRandomUserWithSuccess() {</span>
+        <span class="s1">userRepository.getUsers().clear()</span><span class="s0">;</span>
+        <span class="s1">userRepository.generateRandomUser()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s5">&quot;Test generateRandomUserWithSucces...: &quot; </span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">User user = userRepository.getUsers().get(</span><span class="s6">0</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s2">/**List</span><span class="s7">&lt;User&gt; </span><span class="s2">TestUsers = new ArrayList&lt;&gt;();</span>
+        <span class="s2">TestUsers.add(user);</span>
+        <span class="s2">System.out.println(&quot; Test user size  &quot; + TestUsers.size());</span>
+        <span class="s2">assertEquals(1, TestUsers.size());</span>
+        <span class="s2">*/</span>
+        <span class="s1">assertEquals(</span><span class="s6">1</span><span class="s0">, </span><span class="s1">userRepository.getUsers().size())</span><span class="s0">;</span>
+
+        <span class="s4">//System.out.println(&quot;test FAKE_USERS_RANDOM ...&quot; + FAKE_USERS_RANDOM);</span>
+        <span class="s4">//System.out.println(&quot;generateRandomUserWithSuccess test user.getAvatarUrl ...&quot; + user.getAvatarUrl());</span>
+        <span class="s4">//System.out.println(&quot;generateRandomUserWithSuccess test FAKE_SUER stream ...&quot; + FAKE_USERS_RANDOM.stream().map(User::getAvatarUrl).collect(Collectors.toList()));</span>
+
+        <span class="s1">assertTrue(FAKE_USERS_RANDOM.stream().map(User::getId).collect(Collectors.toList()).contains(user.getId()))</span><span class="s0">;</span>
+        <span class="s1">assertTrue(FAKE_USERS_RANDOM.stream().map(User::getId).collect(Collectors.toList()).contains(user.getId()))</span><span class="s0">;</span>
+        <span class="s1">assertTrue(FAKE_USERS_RANDOM.stream().map(User::getLogin).collect(Collectors.toList()).contains(user.getLogin()))</span><span class="s0">;</span>
+        <span class="s1">assertFalse(FAKE_USERS.stream().map(User::getAvatarUrl).collect(Collectors.toList()).contains(user.getAvatarUrl()))</span><span class="s0">;</span>
+        <span class="s1">assertFalse(FAKE_USERS.stream().map(User::getId).collect(Collectors.toList()).contains(user.getId()))</span><span class="s0">;</span>
+        <span class="s1">assertFalse(FAKE_USERS.stream().map(User::getLogin).collect(Collectors.toList()).contains(user.getLogin()))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Test</span>
+    <span class="s0">public void </span><span class="s1">deleteUserWithSuccess() {</span>
+        <span class="s1">User userToDelete = userRepository.getUsers().get(</span><span class="s6">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot; Test deleteUsersWithSuccess  : &quot; </span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">userRepository.deleteUser(userToDelete)</span><span class="s0">;</span>
+        <span class="s4">//List&lt;User&gt; TestUsers = new ArrayList&lt;&gt;();</span>
+        <span class="s4">//TestUsers.add(userRepository.getUsers());</span>
+        <span class="s4">//System.out.println(&quot; Test user size  &quot; + TestUsers.size());</span>
+        <span class="s4">//System.out.println(&quot;Test deleteUsersWithSuccess : userRepository contains apr delete :&quot; + userRepository.getUsers().contains(userToDelete));</span>
+        <span class="s1">assertFalse(userRepository.getUsers().contains(userToDelete))</span><span class="s0">;</span>
+        <span class="s4">//assertTrue(userRepository.getUsers().contains(userToDelete));</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
